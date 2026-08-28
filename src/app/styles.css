@@ -1,0 +1,1264 @@
+:root {
+  color: #f6f0d3;
+  background: #101724;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button {
+  font: inherit;
+}
+
+button:focus-visible,
+summary:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #91d7bc;
+  outline-offset: 2px;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 2rem;
+  background:
+    linear-gradient(135deg, rgb(18 30 49 / 90%), rgb(16 23 36 / 96%)),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 31px,
+      rgb(255 255 255 / 3%) 32px
+    );
+}
+
+.app-layout {
+  display: grid;
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  gap: 1.5rem;
+  grid-template-columns: minmax(18rem, 0.85fr) minmax(26rem, 1.15fr);
+  align-items: start;
+}
+
+.game-layout {
+  display: grid;
+  width: min(100%, 84rem);
+  margin: 0 auto;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.7fr) minmax(20rem, 0.7fr);
+  align-items: start;
+}
+
+.app-layout--single,
+.game-layout--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.loading-panel {
+  border: 3px solid #5d7591;
+  padding: 2rem;
+  color: #a9bed0;
+  text-align: center;
+  background: #162235;
+}
+
+.fortress-workspace {
+  display: grid;
+  gap: 1rem;
+}
+
+.resource-bar,
+.fortress-canvas,
+.fortress-inspector,
+.building-bar,
+.hero-panel {
+  border: 3px solid #5d7591;
+  box-shadow: 6px 6px 0 #05080d;
+  background: #162235;
+}
+
+.resource-bar,
+.fortress-canvas,
+.fortress-inspector,
+.building-bar,
+.hero-panel {
+  padding: 1rem;
+}
+
+.resource-bar,
+.resource-bar ul,
+.fortress-canvas__heading,
+.fortress-inspector__heading,
+.building-bar__heading,
+.fortress-inspector__actions,
+.building-bar__items {
+  display: flex;
+  align-items: center;
+}
+
+.resource-bar,
+.fortress-canvas__heading,
+.fortress-inspector__heading,
+.building-bar__heading {
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.resource-bar__eyebrow,
+.fortress-canvas__eyebrow,
+.fortress-inspector__eyebrow,
+.building-bar__eyebrow {
+  margin: 0 0 0.25rem;
+  color: #91d7bc;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.resource-bar h2,
+.fortress-canvas h1,
+.fortress-inspector h2,
+.building-bar h2 {
+  margin: 0;
+}
+
+.resource-bar ul {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  gap: 0.45rem;
+  list-style: none;
+}
+
+.resource-bar li {
+  display: grid;
+  min-width: 4.5rem;
+  border: 1px solid #334b67;
+  padding: 0.35rem 0.5rem;
+  gap: 0.1rem;
+  color: #a9bed0;
+  font-size: 0.72rem;
+}
+
+.resource-bar strong {
+  color: #f3c965;
+  font-size: 1rem;
+}
+
+.fortress-workspace__body {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.42fr);
+  align-items: stretch;
+}
+
+.fortress-canvas {
+  min-width: 0;
+}
+
+.fortress-canvas__heading {
+  margin-bottom: 0.75rem;
+}
+
+.fortress-canvas__heading > span {
+  color: #a9bed0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+}
+
+.fortress-canvas__host {
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 2px solid #334b67;
+  place-items: center;
+  background: #101724;
+}
+
+.fortress-canvas__host:focus-visible {
+  border-color: #91d7bc;
+  outline: 3px solid #91d7bc;
+  outline-offset: 2px;
+}
+
+.fortress-canvas__host canvas {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.fortress-canvas__loading {
+  position: absolute;
+  z-index: 1;
+  color: #a9bed0;
+  font-size: 0.8rem;
+}
+
+.fortress-canvas__hint,
+.fortress-inspector__mode,
+.fortress-inspector__empty {
+  color: #a9bed0;
+  line-height: 1.5;
+}
+
+.fortress-canvas__hint {
+  min-height: 1.5rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.82rem;
+}
+
+.fortress-inspector {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.fortress-inspector__mode {
+  min-height: 2.5rem;
+  margin: 1rem 0;
+}
+
+.fortress-inspector__empty {
+  margin: 0;
+}
+
+.fortress-inspector__details {
+  display: grid;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.fortress-inspector__details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid #334b67;
+  padding-bottom: 0.45rem;
+}
+
+.fortress-inspector__details dt {
+  color: #a9bed0;
+}
+
+.fortress-inspector__details dd {
+  margin: 0;
+  color: #f3c965;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+.fortress-inspector__actions {
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 1rem;
+  gap: 0.5rem;
+}
+
+.fortress-button {
+  border: 2px solid #d0a84f;
+  padding: 0.5rem 0.7rem;
+  color: #f6f0d3;
+  background: #283a52;
+  cursor: pointer;
+  font: inherit;
+}
+
+.fortress-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.fortress-button--quiet {
+  border-color: #5d7591;
+  color: #a9bed0;
+}
+
+.fortress-button--danger {
+  border-color: #bd625d;
+  color: #ffd3ca;
+  background: #4e2d35;
+}
+
+.resource-bar__empty {
+  color: #a9bed0;
+}
+
+.game-status-bar {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #334b67;
+  padding: 0.55rem 0.75rem;
+  gap: 1rem;
+  background: #121d2d;
+}
+
+.game-status-bar > p {
+  min-width: 0;
+  margin: 0;
+  color: #91d7bc;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.game-status-bar > .status-error {
+  color: #ffb7a9;
+}
+
+.save-controls {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.save-controls summary {
+  border: 1px solid #5d7591;
+  padding: 0.4rem 0.65rem;
+  color: #f6f0d3;
+  background: #283a52;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 800;
+  list-style: none;
+}
+
+.save-controls summary::-webkit-details-marker {
+  display: none;
+}
+
+.save-controls__menu {
+  position: absolute;
+  z-index: 30;
+  right: 0;
+  display: grid;
+  width: min(19rem, calc(100vw - 2rem));
+  margin-top: 0.4rem;
+  border: 2px solid #5d7591;
+  box-shadow: 5px 5px 0 #05080d;
+  padding: 0.75rem;
+  gap: 0.5rem;
+  background: #162235;
+}
+
+.save-controls__menu p {
+  margin: 0 0 0.25rem;
+  color: #a9bed0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.save-controls__menu .fortress-button {
+  width: 100%;
+  text-align: center;
+}
+
+.save-controls__file {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.save-controls__file input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.save-controls__file--disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.save-controls__notice,
+.save-controls__error {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: min(22rem, calc(100vw - 2rem));
+  margin: 0;
+  border: 1px solid #4f7c6e;
+  padding: 0.55rem;
+  color: #b9f1dc;
+  background: #17332d;
+  font-size: 0.74rem;
+}
+
+.save-controls__error {
+  border-color: #bd625d;
+  color: #ffd3ca;
+  background: #4e2d35;
+}
+
+.confirm-dialog__backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  padding: 1rem;
+  place-items: center;
+  background: rgb(5 8 13 / 78%);
+}
+
+.confirm-dialog {
+  width: min(100%, 30rem);
+  border: 3px solid #d0a84f;
+  box-shadow: 7px 7px 0 #05080d;
+  padding: 1.25rem;
+  background: #162235;
+}
+
+.confirm-dialog h2,
+.confirm-dialog p {
+  margin: 0;
+}
+
+.confirm-dialog h2 {
+  color: #f3c965;
+  font-size: 1.2rem;
+}
+
+.confirm-dialog__body {
+  margin-top: 0.8rem;
+  color: #d9e2e9;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.confirm-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  gap: 0.6rem;
+}
+
+.save-controls__import-summary {
+  display: grid;
+  margin: 0 0 0.75rem;
+  gap: 0.35rem;
+}
+
+.save-controls__import-summary div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.save-controls__import-summary dt {
+  color: #a9bed0;
+}
+
+.save-controls__import-summary dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.building-bar__heading {
+  margin-bottom: 0.75rem;
+}
+
+.building-bar__items {
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.6rem;
+}
+
+.building-card {
+  display: grid;
+  min-width: 8.75rem;
+  flex: 1 1 8.75rem;
+  border: 2px solid #334b67;
+  padding: 0.65rem;
+  gap: 0.2rem;
+  color: #a9bed0;
+  background: #1c2a3e;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  text-align: left;
+}
+
+.building-card--selected,
+.building-card:hover {
+  border-color: #f3c965;
+  background: #283a52;
+}
+
+.building-card__name {
+  color: #f6f0d3;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.hero-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.hero-panel__heading,
+.hero-card__heading,
+.hero-panel__backpack li,
+.hero-card__skills div {
+  display: flex;
+  align-items: center;
+}
+
+.hero-panel__heading {
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hero-panel__heading h2,
+.hero-panel__backpack h3,
+.hero-panel__eyebrow {
+  margin: 0;
+}
+
+.hero-panel__eyebrow {
+  margin-bottom: 0.25rem;
+  color: #91d7bc;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.hero-panel__heading > span {
+  color: #a9bed0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+}
+
+.hero-panel__recruitment {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.65rem;
+}
+
+.hero-panel__recruitment > span {
+  color: #f3c965;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+}
+
+.hero-panel__message {
+  min-height: 1.25rem;
+  margin: -0.35rem 0 0;
+  color: #91d7bc;
+  font-size: 0.78rem;
+}
+
+.hero-panel__list,
+.hero-panel__backpack ul {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 0.65rem;
+  list-style: none;
+}
+
+.hero-panel__list {
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+
+.hero-card {
+  border: 1px solid #334b67;
+  padding: 0;
+  background: #1c2a3e;
+}
+
+.hero-card--selected {
+  border-color: #f3c965;
+  box-shadow: inset 0 0 0 1px #f3c965;
+}
+
+.hero-card__select {
+  display: grid;
+  width: 100%;
+  border: 0;
+  padding: 0.75rem;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.hero-card__select:focus-visible {
+  outline: 3px solid #91d7bc;
+  outline-offset: 2px;
+}
+
+.hero-card__role {
+  margin-top: 0.25rem;
+  color: #a9bed0;
+  font-size: 0.7rem;
+}
+
+.hero-card__heading {
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.hero-card__heading strong {
+  color: #f3c965;
+}
+
+.hero-card__heading span {
+  color: #91d7bc;
+  font-size: 0.75rem;
+}
+
+.hero-card__energy {
+  height: 0.5rem;
+  overflow: hidden;
+  margin-top: 0.75rem;
+  background: #0e1724;
+}
+
+.hero-card__energy span {
+  display: block;
+  height: 100%;
+  background: #91d7bc;
+  transition: width 100ms linear;
+}
+
+.hero-card__energy-label {
+  margin: 0.35rem 0 0;
+  color: #a9bed0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+}
+
+.hero-card__skills {
+  display: grid;
+  margin: 0.75rem 0;
+  gap: 0.3rem;
+}
+
+.hero-card__skills div {
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: #a9bed0;
+  font-size: 0.75rem;
+}
+
+.hero-card__skills dd {
+  margin: 0;
+  color: #f6f0d3;
+}
+
+.hero-card__preference {
+  display: grid;
+  color: #a9bed0;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+}
+
+.hero-card__preference select {
+  border: 1px solid #5d7591;
+  padding: 0.35rem;
+  color: #f6f0d3;
+  background: #101724;
+  font: inherit;
+}
+
+.hero-details {
+  border: 2px solid #465f7a;
+  padding: 1rem;
+  background: #121d2d;
+}
+
+.hero-details__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hero-details__heading h3,
+.hero-details h4 {
+  margin: 0;
+}
+
+.status-warn,
+.status-ready {
+  border: 1px solid currentColor;
+  padding: 0.25rem 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.status-warn {
+  color: #f0a66a;
+}
+
+.status-ready {
+  color: #91d7bc;
+}
+
+.hero-details__housing {
+  margin-top: 0.9rem;
+  border: 1px solid #8f6541;
+  padding: 0.75rem;
+  color: #ffd4a3;
+  background: #382a27;
+}
+
+.hero-details__housing p {
+  margin: 0.4rem 0 0;
+  color: #d4b99f;
+  font-size: 0.78rem;
+}
+
+.hero-details__housing div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.65rem;
+  gap: 0.5rem;
+}
+
+.hero-details > .hero-card__preference {
+  max-width: 16rem;
+  margin-top: 0.9rem;
+}
+
+.hero-details__columns {
+  display: grid;
+  margin-top: 1rem;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hero-details__columns > section,
+.growth-preview__grid > section {
+  min-width: 0;
+  border: 1px solid #334b67;
+  padding: 0.75rem;
+  background: #18263a;
+}
+
+.hero-details h4,
+.growth-preview h4 {
+  color: #f3c965;
+  font-size: 0.82rem;
+}
+
+.hero-details__stats,
+.hero-details__progress {
+  display: grid;
+  margin: 0.65rem 0 0;
+  gap: 0.35rem;
+}
+
+.hero-details__stats div,
+.hero-details__progress div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.65rem;
+  color: #a9bed0;
+  font-size: 0.72rem;
+}
+
+.hero-details__stats dd,
+.hero-details__progress dd {
+  margin: 0;
+  color: #f6f0d3;
+  text-align: right;
+}
+
+.hero-details__current,
+.hero-details__queue,
+.growth-preview p,
+.growth-preview ul {
+  color: #a9bed0;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.hero-details__current {
+  margin: 0.65rem 0;
+}
+
+.hero-details__queue {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.growth-preview {
+  margin-top: 0.8rem;
+  border-top: 1px solid #334b67;
+  padding-top: 0.75rem;
+}
+
+.growth-preview summary {
+  color: #91d7bc;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.growth-preview__grid {
+  display: grid;
+  margin-top: 0.75rem;
+  gap: 0.6rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.growth-preview p,
+.growth-preview ul {
+  margin: 0.55rem 0 0;
+}
+
+.growth-preview ul {
+  padding-left: 1rem;
+}
+
+.hero-panel__backpack {
+  border-top: 1px solid #334b67;
+  padding-top: 0.75rem;
+}
+
+.hero-panel__backpack h3 {
+  color: #f3c965;
+  font-size: 0.95rem;
+}
+
+.hero-panel__backpack p {
+  margin: 0.5rem 0 0;
+  color: #a9bed0;
+  font-size: 0.8rem;
+}
+
+.hero-panel__backpack ul {
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  margin-top: 0.6rem;
+}
+
+.hero-panel__backpack li {
+  justify-content: space-between;
+  gap: 0.5rem;
+  border: 1px solid #334b67;
+  padding: 0.4rem 0.5rem;
+  color: #a9bed0;
+  font-size: 0.75rem;
+}
+
+.hero-panel__backpack strong {
+  color: #f3c965;
+}
+
+.welcome-panel {
+  width: 100%;
+  border: 4px solid #d0a84f;
+  box-shadow: 8px 8px 0 #05080d;
+  padding: clamp(2rem, 8vw, 4.5rem);
+  text-align: center;
+  background: #1c2a3e;
+}
+
+.welcome-panel__eyebrow {
+  margin: 0 0 0.75rem;
+  color: #91d7bc;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.welcome-panel h1 {
+  margin: 0;
+  color: #f3c965;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2rem, 11vw, 5rem);
+  line-height: 1;
+}
+
+.welcome-panel__description {
+  max-width: 31rem;
+  margin: 1.5rem auto 2rem;
+  color: #d9e2e9;
+  line-height: 1.7;
+}
+
+.welcome-panel__start {
+  min-width: 13rem;
+  border: 3px solid #fff0ac;
+  box-shadow: 4px 4px 0 #70501b;
+  padding: 0.9rem 1.3rem;
+  color: #1b2029;
+  background: #f3c965;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.welcome-panel__start:hover {
+  background: #ffe08b;
+}
+
+.welcome-panel__start:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.welcome-panel__start:focus-visible {
+  outline: 3px solid #91d7bc;
+  outline-offset: 4px;
+}
+
+.welcome-panel__status {
+  min-height: 1.5rem;
+  margin: 1.5rem 0 0;
+  color: #91d7bc;
+}
+
+.progression-panel {
+  display: grid;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.progression-section {
+  border: 1px solid #334b67;
+  padding: 0.9rem;
+  background: #101a29;
+}
+
+.progression-section__heading,
+.progression-actions,
+.equipment-inventory li,
+.skill-list li,
+.region-card > div:first-child {
+  display: flex;
+  align-items: center;
+}
+
+.progression-section__heading {
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  gap: 0.75rem;
+}
+
+.progression-section h4 {
+  margin: 0;
+}
+
+.progression-section__heading > span,
+.progression-section__heading label,
+.progression-hint,
+.progression-empty,
+.expedition-status {
+  color: #a9bed0;
+  font-size: 0.76rem;
+}
+
+.progression-empty,
+.expedition-status {
+  margin: 0.75rem 0 0;
+  border: 1px dashed #465f7a;
+  padding: 0.6rem;
+  line-height: 1.5;
+}
+
+.progression-section__heading label {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.progression-section select {
+  border: 1px solid #5d7591;
+  padding: 0.35rem;
+  color: #f6f0d3;
+  background: #101724;
+}
+
+.equipment-slots {
+  display: grid;
+  gap: 0.35rem;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+
+.equipment-slot {
+  display: grid;
+  min-height: 4.2rem;
+  border: 1px solid #334b67;
+  padding: 0.5rem;
+  gap: 0.2rem;
+}
+
+.equipment-slot > span,
+.equipment-slot small,
+.equipment-inventory small,
+.skill-list small,
+.region-card small {
+  color: #a9bed0;
+  font-size: 0.7rem;
+}
+
+.equipment-slot strong {
+  font-size: 0.76rem;
+}
+
+.progression-actions {
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+  gap: 0.5rem;
+}
+
+.affix-choice {
+  display: grid;
+  margin-top: 0.75rem;
+  border: 1px solid #d0a84f;
+  padding: 0.7rem;
+  gap: 0.25rem;
+  background: #23283a;
+}
+
+.affix-choice > span {
+  color: #f3c965;
+  font-size: 0.76rem;
+}
+
+.equipment-inventory,
+.skill-list {
+  display: grid;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  gap: 0.35rem;
+  list-style: none;
+}
+
+.equipment-inventory li,
+.skill-list li {
+  justify-content: space-between;
+  border-top: 1px solid #334b67;
+  padding-top: 0.45rem;
+  gap: 0.65rem;
+}
+
+.equipment-inventory li > span,
+.skill-list li > span {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.rune-trees {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+}
+
+.rune-tree {
+  display: grid;
+  border: 1px solid #334b67;
+  padding: 0.45rem;
+  gap: 0.3rem;
+}
+
+.rune-tree > strong {
+  color: #f3c965;
+  font-size: 0.8rem;
+}
+
+.rune-node {
+  border: 1px solid #5d7591;
+  padding: 0.4rem;
+  color: #d9e2e9;
+  background: #1c2a3e;
+  cursor: pointer;
+  font-size: 0.72rem;
+  text-align: left;
+}
+
+.rune-node:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.rune-node--unlocked {
+  border-color: #70c46b;
+  color: #91d7bc;
+  opacity: 1 !important;
+}
+
+.rune-node--choice {
+  display: grid;
+  border-color: #b77cff;
+  gap: 0.25rem;
+}
+
+.rune-node--choice button {
+  border: 1px solid #b77cff;
+  padding: 0.35rem;
+  color: #f6f0d3;
+  background: #382b4d;
+  cursor: pointer;
+  font-size: 0.68rem;
+}
+
+.rune-node--choice button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.region-list {
+  display: grid;
+  margin-bottom: 0.75rem;
+  gap: 0.55rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+}
+
+.region-card {
+  display: grid;
+  border: 1px solid #5d7591;
+  padding: 0.65rem;
+  gap: 0.45rem;
+}
+
+.region-card--locked {
+  opacity: 0.62;
+}
+
+.region-card > div:first-child {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.region-card > div:first-child span {
+  color: #a9bed0;
+  font-size: 0.72rem;
+}
+
+.region-progress {
+  height: 0.45rem;
+  overflow: hidden;
+  border: 1px solid #334b67;
+  background: #0b111b;
+}
+
+.region-progress span {
+  display: block;
+  height: 100%;
+  background: #70c46b;
+}
+
+.expedition-result {
+  display: grid;
+  border: 1px solid #d0a84f;
+  padding: 0.75rem;
+  gap: 0.5rem;
+  color: #d9e2e9;
+  background: #23283a;
+  font-size: 0.78rem;
+}
+
+.expedition-result strong {
+  color: #f3c965;
+}
+
+.expedition-result .fortress-button {
+  justify-self: start;
+}
+
+@media (max-width: 840px) {
+  .app-layout,
+  .game-layout,
+  .fortress-workspace__body {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-details__columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    padding: 1rem;
+  }
+
+  .welcome-panel {
+    padding: 2rem 1rem;
+  }
+
+  .resource-bar,
+  .fortress-canvas__heading,
+  .building-bar__heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .game-status-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .save-controls summary {
+    text-align: center;
+  }
+
+  .save-controls__menu,
+  .save-controls__notice,
+  .save-controls__error {
+    right: auto;
+    left: 0;
+    width: 100%;
+  }
+
+  .progression-section__heading,
+  .equipment-inventory li,
+  .skill-list li {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hero-panel__heading,
+  .hero-details__heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hero-panel__recruitment {
+    justify-content: flex-start;
+  }
+
+  .growth-preview__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-bar ul {
+    justify-content: flex-start;
+  }
+}

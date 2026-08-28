@@ -1,0 +1,8 @@
+dist/
+coverage/
+node_modules/
+output/
+.playwright-cli/
+package-lock.json
+LICENSE
+docs/
